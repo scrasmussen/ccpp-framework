@@ -3,7 +3,7 @@
 """Classes to aid the parsing process"""
 
 # Python library imports
-import collections
+from collections.abc import Iterable
 import copy
 # CCPP framework imports
 
@@ -82,7 +82,7 @@ class ParseContextError(CCPPError):
 
 ########################################################################
 
-class ContextRegion(collections.Iterable):
+class ContextRegion(Iterable):
     """Class to imitate the LIFO nature of program language blocks"""
 
     def __init__(self):

@@ -55,14 +55,14 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../cmake")
 # The Fortran compiler/linker flag inserted by cmake to create shared libraries
 # with the Intel compiler is deprecated (-i_dynamic), correct here.
 # CMAKE_Fortran_COMPILER_ID = {"Intel", "PGI", "GNU", "Clang", "MSVC", ...}
-if ("${CMAKE_Fortran_COMPILER_ID}" STREQUAL "Intel")
-    string(REPLACE "-i_dynamic" "-shared-intel"
-           CMAKE_SHARED_LIBRARY_CREATE_Fortran_FLAGS
-           "${CMAKE_SHARED_LIBRARY_CREATE_Fortran_FLAGS}")
-    string(REPLACE "-i_dynamic" "-shared-intel"
-           CMAKE_SHARED_LIBRARY_LINK_Fortran_FLAGS
-           "${CMAKE_SHARED_LIBRARY_LINK_Fortran_FLAGS}")
-endif()
+# if ("${CMAKE_Fortran_COMPILER_ID}" STREQUAL "Intel")
+#     string(REPLACE "-i_dynamic" "-shared-intel"
+#            CMAKE_SHARED_LIBRARY_CREATE_Fortran_FLAGS
+#            "${CMAKE_SHARED_LIBRARY_CREATE_Fortran_FLAGS}")
+#     string(REPLACE "-i_dynamic" "-shared-intel"
+#            CMAKE_SHARED_LIBRARY_LINK_Fortran_FLAGS
+#            "${CMAKE_SHARED_LIBRARY_LINK_Fortran_FLAGS}")
+# endif()
 
 #------------------------------------------------------------------------------
 # Set a default build type if none was specified
@@ -77,11 +77,11 @@ endif()
 
 #------------------------------------------------------------------------------
 # Pass debug/release flag to Fortran files for preprocessor
-if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-  set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -DDEBUG")
-else(CMAKE_BUILD_TYPE)
-  set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -DRELEASE")
-endif()
+# if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+#   set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -DDEBUG")
+# else(CMAKE_BUILD_TYPE)
+#   set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -DRELEASE")
+# endif()
 
 #------------------------------------------------------------------------------
 # Add the toplevel source directory to our include directoies (for .h)
@@ -114,7 +114,7 @@ endif(STATIC)
 target_link_libraries(ccpp LINK_PUBLIC ${LIBS} ${CMAKE_DL_LIBS})
 set_target_properties(ccpp PROPERTIES VERSION ${PROJECT_VERSION}
                                       SOVERSION ${PROJECT_VERSION_MAJOR}
-                                      LINK_FLAGS ${CMAKE_Fortran_FLAGS})
+                                      LINK_FLAGS "${CMAKE_Fortran_FLAGS}")
 
 #------------------------------------------------------------------------------
 # Installation

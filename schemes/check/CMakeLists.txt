@@ -89,7 +89,7 @@ if ("${CMAKE_Fortran_COMPILER_ID}" STREQUAL "Intel")
 endif()
 
 # Guard for undefined/empty CMAKE_Fortran_FLAGS
-set(CMAKE_Fortran_FLAGS " ${CMAKE_Fortran_FLAGS}")
+# set(CMAKE_Fortran_FLAGS " ${CMAKE_Fortran_FLAGS}")
 
 add_library(check ${SOURCES})
 target_link_libraries(check LINK_PUBLIC ${LIBS})

@@ -781,9 +781,9 @@ def main():
                 raise Exception('Call to generate_include_files failed.')
 
     # Add filenames of schemes to makefile - add dependencies for schemes
-    success = generate_schemes_makefile(config['scheme_files_dependencies'] + config['scheme_files'].keys(),
-                                        config['schemes_makefile'], config['schemes_cmakefile'],
-                                        config['schemes_sourcefile'])
+    success = generate_schemes_makefile(list(config['scheme_files_dependencies']) + list(config['scheme_files']),
+                                    config['schemes_makefile'], config['schemes_cmakefile'],
+                                    config['schemes_sourcefile'])
     if not success:
         raise Exception('Call to generate_schemes_makefile failed.')
 
@@ -795,11 +795,11 @@ def main():
             raise Exception('Call to generate_suite_and_group_caps failed.')
 
         (success, api) = generate_static_api(suites, config['static_api_dir'])
-        if not success: 
+        if not success:
             raise Exception('Call to generate_static_api failed.')
 
         success = api.write_sourcefile(config['static_api_srcfile'])
-        if not success: 
+        if not success:
             raise Exception("Writing API sourcefile {sourcefile} failed".format(sourcefile=config['static_api_srcfile']))
     else:
         # Generate scheme caps for each individual scheme

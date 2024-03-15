@@ -150,7 +150,7 @@ def convert_file(filename_in, filename_out, metadata_filename_out, model, logger
     # Read all lines of the file at once
     with open(filename_in, 'r') as file:
         fin_lines = file.readlines()
-        for index in xrange(len(fin_lines)):
+        for index in range(len(fin_lines)):
             fin_lines[index] = fin_lines[index].rstrip('\n')
             # First loop through file to build dictionary with local names versus standard names
             # and to record array dimensions from allocate statements
@@ -219,7 +219,7 @@ def convert_file(filename_in, filename_out, metadata_filename_out, model, logger
     if model == 'FV3':
         # Replace local dimensions in GFS_typedefs.F90, CCPP_typedefs.F90 and CCPP_data.F90 with correct standard names
         for key in dimensions.keys():
-            for i in xrange(len(dimensions[key])):
+            for i in range(len(dimensions[key])):
                 dim = dimensions[key][i]
                 if dim == 'im':
                     dimensions[key][i] = 'horizontal_dimension'
@@ -341,7 +341,7 @@ def convert_file(filename_in, filename_out, metadata_filename_out, model, logger
                     file.write('!! \htmlinclude {}.html\n'.format(table_name))
                     #
                     table_header = [x.strip() for x in words[1:-1]]
-                    for ind in xrange(len(table_header)):
+                    for ind in range(len(table_header)):
                         header_locs[table_header[ind]] = ind
                     # End for
                     # Find the local_name index (exception if not found)
@@ -425,7 +425,7 @@ def convert_file(filename_in, filename_out, metadata_filename_out, model, logger
                         mdobj = MetadataEntry(var_name)
                         mdtable[var_name] = mdobj
                         # Now, create the rest of the entries
-                        for ind in xrange(len(entries)):
+                        for ind in range(len(entries)):
                             attr_name = table_header[ind]
                             entry = entries[ind]
                             if attr_name == 'local_name':
@@ -652,7 +652,7 @@ def convert_file(filename_in, filename_out, metadata_filename_out, model, logger
         spacer = ""
         # First pass: write type definitions,
         # second pass: write module table
-        for count in xrange(2):
+        for count in range(2):
             for table in mdconfig:
                 if (count == 0 and not table.type == 'ddt') or \
                    (count == 1 and table.type == 'ddt'):
