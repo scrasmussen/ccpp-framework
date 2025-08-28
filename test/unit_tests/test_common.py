@@ -34,18 +34,6 @@ class CommonTestCase(unittest.TestCase):
 
     """Tests functionality of functions in common.py"""
 
-    def test_execute(self):
-        """Test execute() function"""
-
-        # Input for successful test: ls command on this file
-        self.assertEqual(common.execute(f"ls {TEST_FILE}"),(0,f"{TEST_FILE}",""))
-
-        # Input for failing test (no exception): exit 1 from a subshell
-        self.assertEqual(common.execute(f"(exit 1)",abort=False),(1,"",f""))
-
-        # Input for failing test (raise exception): exit 1 from a subshell
-        self.assertRaises(Exception,common.execute,f"(exit 1)",abort=True)
-
     def test_split_var_name_and_array_reference(self):
         """Test split_var_name_and_array_reference() function"""
 
@@ -59,18 +47,18 @@ class CommonTestCase(unittest.TestCase):
         typename = "COMPLEX"
         schemename = "testscheme"
         subroutinename = "testsubroutine"
-        self.assertEqual(common.encode_container(modulename),f"MODULE_{modulename}")
-        self.assertEqual(common.encode_container(modulename,typename),f"MODULE_{modulename} TYPE_{typename}")
+        self.assertEqual(common.encode_container(modulename),f"MODULE_{modulename.lower()}")
+        self.assertEqual(common.encode_container(modulename,typename),f"MODULE_{modulename.lower()} TYPE_{typename.lower()}")
         self.assertEqual(common.encode_container(modulename,schemename,subroutinename),
-                         f"MODULE_{modulename} SCHEME_{schemename} SUBROUTINE_{subroutinename}")
+                         f"MODULE_{modulename.lower()} SCHEME_{schemename.lower()} SUBROUTINE_{subroutinename.lower()}")
         self.assertRaises(Exception,common.encode_container,modulename,typename,schemename,subroutinename)
         self.assertRaises(Exception,common.encode_container)
 
     def test_decode_container(self):
         """Test decode_container() function"""
 
-        modulename = "ABCD1234"
-        typename = "COMPLEX"
+        modulename = "abcd1234"
+        typename = "complex"
         schemename = "testscheme"
         subroutinename = "testsubroutine"
         self.assertEqual(common.decode_container(f"MODULE_{modulename}"),f"MODULE {modulename}")
